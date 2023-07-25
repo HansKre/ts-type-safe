@@ -58,7 +58,7 @@ export function isEnumKey<T extends Record<PropertyKey, unknown>>(
  * https://stackoverflow.com/questions/58278652/generic-enum-type-guard
  *
  */
-export function isSomeEnumValueGenerator<T extends Record<string, unknown>>(
+export function isEnumValueGenerator<T extends Record<string, unknown>>(
   enumType: T
 ) {
   const typeGuard = (value: unknown): value is T[keyof T] =>
@@ -84,7 +84,7 @@ export function isSomeEnumValueGenerator<T extends Record<string, unknown>>(
  *
  * const testStr = "thing two";
  *
- * if (isSomeEnumValue(MyEnum, testStr)) {
+ * if (isEnumValue(MyEnum, testStr)) {
  *   // compiler knows that testStr is of type `MyEnum`
  *   testVals(testStr);
  * }
@@ -92,7 +92,7 @@ export function isSomeEnumValueGenerator<T extends Record<string, unknown>>(
  * @param enumType
  * @param value
  */
-export function isSomeEnumValue<T extends Record<string, unknown>>(
+export function isEnumValue<T extends Record<string, unknown>>(
   enumType: T,
   value: unknown
 ): value is T[keyof T] {
