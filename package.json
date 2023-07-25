@@ -6,7 +6,7 @@
     "prebuild": "rimraf dist",
     "build": "tsc",
     "build:check": "tsc --noEmit",
-    "prepublish": "npm run build"
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",
