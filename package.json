@@ -1,0 +1,33 @@
+{
+  "name": "ts-type-safe",
+  "version": "1.0.0",
+  "description": "Utilities for a more type-safe TypeScript",
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "tsc",
+    "build:check": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:HansKre/ts-type-safe.git"
+  },
+  "keywords": [
+    "typescript",
+    "ts",
+    "types",
+    "type-safe",
+    "typeguards",
+    "type-guards"
+  ],
+  "author": "HansKre",
+  "license": "ISC",
+  "devDependencies": {
+    "rimraf": "^5.0.1",
+    "typescript": "^5.0.4"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  }
+}
