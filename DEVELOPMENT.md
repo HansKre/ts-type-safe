@@ -9,6 +9,6 @@ npm install
 # bump lib-version in package.json
 npm version patch #patch|minor|major
 npm login
-npm run build
+# npm run build <-- not needed if prepublish-script exists and does that
 npm publish
 ```
