@@ -5,7 +5,8 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "tsc",
-    "build:check": "tsc --noEmit"
+    "build:check": "tsc --noEmit",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",

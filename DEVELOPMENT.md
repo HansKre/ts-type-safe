@@ -8,6 +8,7 @@ npm install
 # commit & push code
 # bump lib-version in package.json
 npm version patch #patch|minor|major
+npm login
 npm run build
 npm publish
 ```
