@@ -2,6 +2,10 @@ function isObject(value: unknown): value is object {
   return typeof value === 'object' && value !== null;
 }
 
+export function isDefined<T>(value: T): value is NonNullable<T> {
+  return value !== undefined && value !== null;
+}
+
 /**
  * Checks existence of @propKey on an object and retypes the @obj
  */
