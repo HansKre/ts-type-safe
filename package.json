@@ -1,6 +1,6 @@
 {
   "name": "ts-type-safe",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Utilities for a more type-safe TypeScript",
   "scripts": {
     "prebuild": "rimraf dist",
