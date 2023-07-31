@@ -6,6 +6,7 @@
     "prebuild": "rimraf dist",
     "build": "tsc",
     "build:check": "tsc --noEmit",
+    "build:doc": "jsdoc2md --configure ./jsdoc2md.json --template README.hbs --no-cache --files ./src/**/*.ts > README.md",
     "prepare": "npm run build"
   },
   "repository": {
@@ -23,8 +24,14 @@
   "author": "HansKre",
   "license": "ISC",
   "devDependencies": {
+    "@babel/cli": "^7.22.9",
+    "@babel/core": "^7.22.9",
+    "@babel/preset-env": "^7.22.9",
+    "@babel/preset-typescript": "^7.22.5",
+    "jsdoc-babel": "^0.5.0",
+    "jsdoc-to-markdown": "^8.0.0",
     "rimraf": "^5.0.1",
-    "typescript": "^5.0.4"
+    "typescript": "^5.1.6"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
