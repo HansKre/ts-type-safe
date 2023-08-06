@@ -6,31 +6,7 @@
  *
  */
 
-const tests = [
-  { label: '1', value: 1, expect: true },
-  { label: "'1'", value: '1', expect: true },
-  { label: "'01'", value: '01', expect: false },
-  { label: "'0001'", value: '0001', expect: false },
-  { label: "'00.01'", value: '00.01', expect: false },
-  { label: '1.1', value: 1.1, expect: true },
-  { label: "'1.1'", value: '1.1', expect: true },
-  { label: '0', value: 0, expect: true },
-  { label: "'0'", value: '0', expect: true },
-  { label: "'-0'", value: '-0', expect: true },
-  { label: "'-0.0'", value: '-0.0', expect: true },
-  { label: "'-0.0000'", value: '-0.00000', expect: true },
-  { label: "'-0.00001'", value: '-0.000001', expect: true },
-  { label: "'0.00001'", value: '0.000001', expect: true },
-  { label: '0.2abc', value: '0.2abc', expect: false },
-  { label: '0.2,3', value: '0.2,3', expect: false },
-  { label: '-0.2', value: -0.2, expect: true },
-  { label: "'-0.2'", value: '-0.2', expect: true },
-  { label: 'Infinity', value: Infinity, expect: false },
-  { label: 'undefined', value: undefined, expect: false },
-  { label: 'null', value: null, expect: false },
-];
-
-function isMathematicalNumber(
+export function isMathematicalNumber(
   value: number | string | null | undefined
 ): value is number {
   if (value === null || value === undefined || {} || Array.isArray(value))
@@ -54,12 +30,6 @@ function isMathematicalNumber(
   const regex = /^-?(?!0\d)\d*(\.\d+)?$/;
   if (typeof value === 'string' && regex.test(value)) return true;
   return false;
-}
-
-for (const test of tests) {
-  const passes =
-    isMathematicalNumber(test.value) === test.expect ? 'passed' : 'failed';
-  //   console.log(test.label, passes);
 }
 
 /*
