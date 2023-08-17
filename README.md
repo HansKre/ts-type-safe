@@ -42,13 +42,13 @@
 <a name="module_types..Prettify<T>"></a>
 
 ### types~Prettify<T> : <code>Prettify</code>
-<p><strong>Helper type to show all properties of a complex base-type</strong></p>
+<p>Helper type to show all properties of a complex base-type</p>
 
 **Kind**: inner typedef of [<code>types</code>](#module_types)  
 <a name="module_types..ValuesOf<T>"></a>
 
 ### types~ValuesOf<T> : <code>ValuesOf</code>
-<p><strong>Helper type to generate values of a given type</strong></p>
+<p>Helper type to generate values of a given type</p>
 <p>NOTE: not for enum-types!</p>
 <p>To create values of an enum-type, use:</p>
 <pre class="prettyprint source"><code>type EnumVals = `${EnumType}`;
@@ -66,7 +66,7 @@ type FooVals = ValuesOf<typeof Foo>;
 <a name="module_types..KeysOf<T>"></a>
 
 ### types~KeysOf<T> : <code>KeysOf</code>
-<p><strong>Helper type to generate keys of a given type</strong></p>
+<p>Helper type to generate keys of a given type</p>
 
 **Kind**: inner typedef of [<code>types</code>](#module_types)  
 **Example**  
@@ -85,7 +85,7 @@ type FooKeys = KeysOf<typeof Foo>;
 <a name="module_classNames..classNames"></a>
 
 ### classNames~classNames(...names)
-<p><strong>Joins classes and avoids complicated checks and usage of nasty string-literals.</strong></p>
+<p>Joins classes and avoids complicated checks and usage of nasty string-literals.</p>
 <p><em>note: exported also as <code>cns</code>-shorthand</em></p>
 
 **Kind**: inner method of [<code>classNames</code>](#module_classNames)  
@@ -117,7 +117,7 @@ type FooKeys = KeysOf<typeof Foo>;
 <a name="module_validators..isObject"></a>
 
 ### validators~isObject(value)
-<p><strong>Checks if value is not <code>null</code> and of <code>object</code>-type.</strong></p>
+<p>Checks if value is not <code>null</code> and of <code>object</code>-type.</p>
 
 **Kind**: inner method of [<code>validators</code>](#module_validators)  
 
@@ -128,7 +128,7 @@ type FooKeys = KeysOf<typeof Foo>;
 <a name="module_validators..isDefined"></a>
 
 ### validators~isDefined(value)
-<p><strong>Returns <code>true</code> if value is not <code>undefined</code> and not <code>null</code>.</strong></p>
+<p>Returns <code>true</code> if value is not <code>undefined</code> and not <code>null</code>.</p>
 
 **Kind**: inner method of [<code>validators</code>](#module_validators)  
 
@@ -139,7 +139,7 @@ type FooKeys = KeysOf<typeof Foo>;
 <a name="module_validators..hasOwnProperty"></a>
 
 ### validators~hasOwnProperty(obj, propKey)
-<p><strong>Checks existence of @propKey on an object and retypes the <code>@obj</code> as an object having that property of <code>unknown</code>-type.</strong></p>
+<p>Checks existence of @propKey on an object and retypes the <code>@obj</code> as an object having that property of <code>unknown</code>-type.</p>
 
 **Kind**: inner method of [<code>validators</code>](#module_validators)  
 
@@ -151,7 +151,7 @@ type FooKeys = KeysOf<typeof Foo>;
 <a name="module_validators..hasOwnProperties"></a>
 
 ### validators~hasOwnProperties(obj, propKeys)
-<p><strong>Checks existence of @propKeys on an object and retypes the <code>@obj</code> as an object having these properties, all of which of <code>unknown</code>-type.</strong></p>
+<p>Checks existence of @propKeys on an object and retypes the <code>@obj</code> as an object having these properties, all of which of <code>unknown</code>-type.</p>
 
 **Kind**: inner method of [<code>validators</code>](#module_validators)  
 
@@ -163,7 +163,7 @@ type FooKeys = KeysOf<typeof Foo>;
 <a name="module_validators..isNonEmptyArray"></a>
 
 ### validators~isNonEmptyArray(obj)
-<p><strong>Checks if @obj is an array with at least one entry.</strong></p>
+<p>Checks if @obj is an array with at least one entry.</p>
 
 **Kind**: inner method of [<code>validators</code>](#module_validators)  
 
@@ -174,7 +174,7 @@ type FooKeys = KeysOf<typeof Foo>;
 <a name="module_validators..isEmptyArray"></a>
 
 ### validators~isEmptyArray(obj)
-<p><strong>Checks if @obj is an array with zero entries.</strong></p>
+<p>Checks if @obj is an array with zero entries.</p>
 
 **Kind**: inner method of [<code>validators</code>](#module_validators)  
 
@@ -185,7 +185,7 @@ type FooKeys = KeysOf<typeof Foo>;
 <a name="module_validators..isEnumKey"></a>
 
 ### validators~isEnumKey(enumType, value)
-<p><strong>Typeguard for enums-keys</strong></p>
+<p>Typeguard for enums-keys</p>
 <p><em>note: not for number-enums</em></p>
 
 **Kind**: inner method of [<code>validators</code>](#module_validators)  
@@ -216,7 +216,7 @@ if (isEnumKey(MyEnum, testStr)) {
 <a name="module_validators..isEnumValue"></a>
 
 ### validators~isEnumValue(enumType, value)
-<p><strong>Typeguard for enum values</strong></p>
+<p>Typeguard for enum values</p>
 <p><em>note: not for number-enums</em></p>
 
 **Kind**: inner method of [<code>validators</code>](#module_validators)  
