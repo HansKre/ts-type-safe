@@ -4,7 +4,7 @@
  */
 
 /**
- * __Joins classes and avoids complicated checks and usage of nasty string-literals.__
+ * Joins classes and avoids complicated checks and usage of nasty string-literals.
  *
  * _note: exported also as `cns`-shorthand_
  *

@@ -7,7 +7,7 @@
 let STUB = 1;
 
 /**
- * __Helper type to show all properties of a complex base-type__
+ * Helper type to show all properties of a complex base-type
  *
  * @typedef {Prettify} Prettify<T>
  * Constructed type is 100% compatible and assignable to base-type
@@ -20,7 +20,7 @@ export type Prettify<T> = {
 STUB = 1;
 
 /**
- * __Helper type to generate values of a given type__
+ * Helper type to generate values of a given type
  *
  * NOTE: not for enum-types!
  *
@@ -45,7 +45,7 @@ export type ValuesOf<T> = T[keyof T];
 STUB = 1;
 
 /**
- * __Helper type to generate keys of a given type__
+ * Helper type to generate keys of a given type
  *
  * @example
  *

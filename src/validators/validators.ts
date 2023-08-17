@@ -4,7 +4,7 @@
  */
 
 /**
- * __Checks if value is not `null` and of `object`-type.__
+ * Checks if value is not `null` and of `object`-type.
  *
  * @param value to check
  */
@@ -13,7 +13,7 @@ function isObject(value: unknown): value is object {
 }
 
 /**
- * __Returns `true` if value is not `undefined` and not `null`.__
+ * Returns `true` if value is not `undefined` and not `null`.
  *
  * @param value to check
  */
@@ -22,7 +22,7 @@ export function isDefined<T>(value: T): value is NonNullable<T> {
 }
 
 /**
- * __Checks existence of @propKey on an object and retypes the `@obj` as an object having that property of `unknown`-type.__
+ * Checks existence of @propKey on an object and retypes the `@obj` as an object having that property of `unknown`-type.
  *
  * @param obj to check
  * @param propKey which may or may not exist on the `obj`
@@ -35,7 +35,7 @@ export function hasOwnProperty<Y extends PropertyKey>(
 }
 
 /**
- * __Checks existence of @propKeys on an object and retypes the `@obj` as an object having these properties, all of which of `unknown`-type.__
+ * Checks existence of @propKeys on an object and retypes the `@obj` as an object having these properties, all of which of `unknown`-type.
  *
  * @param obj to check
  * @param propKeys list of `@propKeys` which may or may not exist on the `obj`
@@ -48,7 +48,7 @@ export function hasOwnProperties<Y extends PropertyKey>(
 }
 
 /**
- * __Checks if @obj is an array with at least one entry.__
+ * Checks if @obj is an array with at least one entry.
  *
  * @param obj to check
  */
@@ -57,7 +57,7 @@ export function isNonEmptyArray(obj: unknown): obj is unknown[] {
 }
 
 /**
- * __Checks if @obj is an array with zero entries.__
+ * Checks if @obj is an array with zero entries.
  *
  * @param obj to check
  */
@@ -66,7 +66,7 @@ export function isEmptyArray(obj: unknown): obj is unknown[] {
 }
 
 /**
- * __Typeguard for enums-keys__
+ * Typeguard for enums-keys
  *
  * _note: not for number-enums_
  *
@@ -109,7 +109,7 @@ export function isEnumKey<T extends Record<PropertyKey, unknown>>(
 // }
 
 /**
- * __Typeguard for enum values__
+ * Typeguard for enum values
  *
  * _note: not for number-enums_
  *
