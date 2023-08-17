@@ -1,8 +1,9 @@
 <h1>ts-type-safe</h1>
 
-<p>Utilities and types for a more type-safe TypeScript</p>
+<p>Usefuly utility functions and types for a more type-safe TypeScript</p>
 
-[![view on npm](http://img.shields.io/npm/v/example.svg)](https://www.npmjs.com/package/ts-type-safe)
+![view on npm](https://img.shields.io/npm/v/ts-type-safe) ![NPM](https://img.shields.io/npm/l/ts-type-safe)
+
 
 ## Modules
 
@@ -10,9 +11,21 @@
 <dt><a href="#module_types">types</a></dt>
 <dd><p>Helper types to improve type-safety.</p></dd>
 <dt><a href="#module_classNames">classNames</a></dt>
-<dd><p>Helper function to simplify type-safe work with classNames.</p></dd>
+<dd><p>Helper function to simplify type-safe interaction with classNames.</p></dd>
 <dt><a href="#module_validators">validators</a></dt>
 <dd><p>Validators to improve type-safety.</p></dd>
+</dl>
+
+## Functions
+
+<dl>
+<dt><a href="#isMathematicalNumber">isMathematicalNumber()</a></dt>
+<dd><p>consider mathematical number if:</p>
+<ul>
+<li>typeof number</li>
+<li>can parse to int without need to remove anything (i.e. leading zeroes)</li>
+<li>can parse to float without need to remove anything</li>
+</ul></dd>
 </dl>
 
 <a name="module_types"></a>
@@ -35,9 +48,11 @@
 <a name="module_types..ValuesOf<T>"></a>
 
 ### types~ValuesOf<T> : <code>ValuesOf</code>
-<p><strong>Helper type generates values of a given type</strong></p>
-<p>NOTE: not for enum-types!
-Use type EnumVals = `${EnumType}`; to create values of an enum-type</p>
+<p><strong>Helper type to generate values of a given type</strong></p>
+<p>NOTE: not for enum-types!</p>
+<p>To create values of an enum-type, use:</p>
+<pre class="prettyprint source"><code>type EnumVals = `${EnumType}`;
+</code></pre>
 
 **Kind**: inner typedef of [<code>types</code>](#module_types)  
 **Example**  
@@ -51,7 +66,7 @@ type FooVals = ValuesOf<typeof Foo>;
 <a name="module_types..KeysOf<T>"></a>
 
 ### types~KeysOf<T> : <code>KeysOf</code>
-<p><strong>Helper type generates keys of a given type</strong></p>
+<p><strong>Helper type to generate keys of a given type</strong></p>
 
 **Kind**: inner typedef of [<code>types</code>](#module_types)  
 **Example**  
@@ -65,14 +80,24 @@ type FooKeys = KeysOf<typeof Foo>;
 <a name="module_classNames"></a>
 
 ## classNames
-<p>Helper function to simplify type-safe work with classNames.</p>
+<p>Helper function to simplify type-safe interaction with classNames.</p>
 
 <a name="module_classNames..classNames"></a>
 
-### classNames~classNames()
-<p>Helper-Function to join multiple classes and to avoid usage of nasty string-literals</p>
+### classNames~classNames(...names)
+<p><strong>Joins classes and avoids complicated checks and usage of nasty string-literals.</strong></p>
+<p><em>note: exported also as <code>cns</code>-shorthand</em></p>
 
 **Kind**: inner method of [<code>classNames</code>](#module_classNames)  
+
+| Param | Description |
+| --- | --- |
+| ...names | <p>Array of <code>string</code>, <code>undefined</code> or <code>false</code></p> |
+
+**Example**  
+```js
+<div className={cns('primary', !isValid && 'disabled')} />
+```
 <a name="module_validators"></a>
 
 ## validators
@@ -80,23 +105,96 @@ type FooKeys = KeysOf<typeof Foo>;
 
 
 * [validators](#module_validators)
-    * [~hasOwnProperty()](#module_validators..hasOwnProperty)
-    * [~isEnumKey()](#module_validators..isEnumKey)
-    * [~isEnumValueGenerator()](#module_validators..isEnumValueGenerator)
+    * [~isObject(value)](#module_validators..isObject)
+    * [~isDefined(value)](#module_validators..isDefined)
+    * [~hasOwnProperty(obj, propKey)](#module_validators..hasOwnProperty)
+    * [~hasOwnProperties(obj, propKeys)](#module_validators..hasOwnProperties)
+    * [~isNonEmptyArray(obj)](#module_validators..isNonEmptyArray)
+    * [~isEmptyArray(obj)](#module_validators..isEmptyArray)
+    * [~isEnumKey(enumType, value)](#module_validators..isEnumKey)
     * [~isEnumValue(enumType, value)](#module_validators..isEnumValue)
+
+<a name="module_validators..isObject"></a>
+
+### validators~isObject(value)
+<p><strong>Checks if value is not <code>null</code> and of <code>object</code>-type.</strong></p>
+
+**Kind**: inner method of [<code>validators</code>](#module_validators)  
+
+| Param | Description |
+| --- | --- |
+| value | <p>to check</p> |
+
+<a name="module_validators..isDefined"></a>
+
+### validators~isDefined(value)
+<p><strong>Returns <code>true</code> if value is not <code>undefined</code> and not <code>null</code>.</strong></p>
+
+**Kind**: inner method of [<code>validators</code>](#module_validators)  
+
+| Param | Description |
+| --- | --- |
+| value | <p>to check</p> |
 
 <a name="module_validators..hasOwnProperty"></a>
 
-### validators~hasOwnProperty()
-<p>Checks existence of @propKey on an object and retypes the @obj</p>
+### validators~hasOwnProperty(obj, propKey)
+<p><strong>Checks existence of @propKey on an object and retypes the <code>@obj</code> as an object having that property of <code>unknown</code>-type.</strong></p>
 
 **Kind**: inner method of [<code>validators</code>](#module_validators)  
+
+| Param | Description |
+| --- | --- |
+| obj | <p>to check</p> |
+| propKey | <p>which may or may not exist on the <code>obj</code></p> |
+
+<a name="module_validators..hasOwnProperties"></a>
+
+### validators~hasOwnProperties(obj, propKeys)
+<p><strong>Checks existence of @propKeys on an object and retypes the <code>@obj</code> as an object having these properties, all of which of <code>unknown</code>-type.</strong></p>
+
+**Kind**: inner method of [<code>validators</code>](#module_validators)  
+
+| Param | Description |
+| --- | --- |
+| obj | <p>to check</p> |
+| propKeys | <p>list of <code>@propKeys</code> which may or may not exist on the <code>obj</code></p> |
+
+<a name="module_validators..isNonEmptyArray"></a>
+
+### validators~isNonEmptyArray(obj)
+<p><strong>Checks if @obj is an array with at least one entry.</strong></p>
+
+**Kind**: inner method of [<code>validators</code>](#module_validators)  
+
+| Param | Description |
+| --- | --- |
+| obj | <p>to check</p> |
+
+<a name="module_validators..isEmptyArray"></a>
+
+### validators~isEmptyArray(obj)
+<p><strong>Checks if @obj is an array with zero entries.</strong></p>
+
+**Kind**: inner method of [<code>validators</code>](#module_validators)  
+
+| Param | Description |
+| --- | --- |
+| obj | <p>to check</p> |
+
 <a name="module_validators..isEnumKey"></a>
 
-### validators~isEnumKey()
+### validators~isEnumKey(enumType, value)
 <p><strong>Typeguard for enums-keys</strong></p>
+<p><em>note: not for number-enums</em></p>
 
 **Kind**: inner method of [<code>validators</code>](#module_validators)  
+
+| Param | Description |
+| --- | --- |
+| enumType | <p>the type to check against</p> |
+| value | <p>some value to check if it is a key of the given <code>@enumType</code></p> |
+
 **Example**  
 ```js
 enum MyEnum {
@@ -104,7 +202,7 @@ enum MyEnum {
  Thing2 = 'thing two',
 }
 
-function testKeys(key: keyof typeof MyEnum) {
+function onlytKeys(key: keyof typeof MyEnum) {
   console.log(key, MyEnum[key]);
 }
 
@@ -112,27 +210,21 @@ const testStr = "Thing2";
 
 if (isEnumKey(MyEnum, testStr)) {
   // compiler knows that testStr is of type `keyof typeof MyEnum`
-  testKeys(testStr);
+  onlytKeys(testStr);
 }
 ```
-<a name="module_validators..isEnumValueGenerator"></a>
-
-### validators~isEnumValueGenerator()
-<p>https://stackoverflow.com/questions/58278652/generic-enum-type-guard</p>
-
-**Kind**: inner method of [<code>validators</code>](#module_validators)  
 <a name="module_validators..isEnumValue"></a>
 
 ### validators~isEnumValue(enumType, value)
 <p><strong>Typeguard for enum values</strong></p>
+<p><em>note: not for number-enums</em></p>
 
 **Kind**: inner method of [<code>validators</code>](#module_validators)  
-**Todo:**: take care of number-Enums  
 
-| Param |
-| --- |
-| enumType | 
-| value | 
+| Param | Description |
+| --- | --- |
+| enumType | <p>the type to check against</p> |
+| value | <p>some value to check if it is a value of the given <code>@enumType</code></p> |
 
 **Example**  
 ```js
@@ -141,17 +233,29 @@ enum MyEnum {
  Thing2 = 'thing two',
 }
 
-function testVals(val: MyEnum) {
-  console.log("testVals", val);
+function onlyVals(val: MyEnum) {
+  console.log("onlyVals", val);
 }
 
 const testStr = "thing two";
 
 if (isEnumValue(MyEnum, testStr)) {
   // compiler knows that testStr is of type `MyEnum`
-  testVals(testStr);
+  onlyVals(testStr);
 }
 ```
+<a name="isMathematicalNumber"></a>
+
+## isMathematicalNumber()
+<p>consider mathematical number if:</p>
+<ul>
+<li>typeof number</li>
+<li>can parse to int without need to remove anything (i.e. leading zeroes)</li>
+<li>can parse to float without need to remove anything</li>
+</ul>
+
+**Kind**: global function  
+
 
 * * *
 

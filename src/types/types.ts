@@ -20,10 +20,15 @@ export type Prettify<T> = {
 STUB = 1;
 
 /**
- * __Helper type generates values of a given type__
+ * __Helper type to generate values of a given type__
  *
  * NOTE: not for enum-types!
- * Use type EnumVals = \`${EnumType}\`; to create values of an enum-type
+ *
+ * To create values of an enum-type, use:
+ *
+ * ```
+ * type EnumVals = `${EnumType}`;
+ * ```
  *
  * @example
  *
@@ -40,7 +45,7 @@ export type ValuesOf<T> = T[keyof T];
 STUB = 1;
 
 /**
- * __Helper type generates keys of a given type__
+ * __Helper type to generate keys of a given type__
  *
  * @example
  *

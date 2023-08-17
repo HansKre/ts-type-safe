@@ -3,16 +3,29 @@
  * @module validators
  */
 
+/**
+ * __Checks if value is not `null` and of `object`-type.__
+ *
+ * @param value to check
+ */
 function isObject(value: unknown): value is object {
   return typeof value === 'object' && value !== null;
 }
 
+/**
+ * __Returns `true` if value is not `undefined` and not `null`.__
+ *
+ * @param value to check
+ */
 export function isDefined<T>(value: T): value is NonNullable<T> {
   return value !== undefined && value !== null;
 }
 
 /**
- * Checks existence of @propKey on an object and retypes the @obj
+ * __Checks existence of @propKey on an object and retypes the `@obj` as an object having that property of `unknown`-type.__
+ *
+ * @param obj to check
+ * @param propKey which may or may not exist on the `obj`
  */
 export function hasOwnProperty<Y extends PropertyKey>(
   obj: unknown,
@@ -21,6 +34,12 @@ export function hasOwnProperty<Y extends PropertyKey>(
   return isObject(obj) && propKey in obj;
 }
 
+/**
+ * __Checks existence of @propKeys on an object and retypes the `@obj` as an object having these properties, all of which of `unknown`-type.__
+ *
+ * @param obj to check
+ * @param propKeys list of `@propKeys` which may or may not exist on the `obj`
+ */
 export function hasOwnProperties<Y extends PropertyKey>(
   obj: unknown,
   propKeys: Y[]
@@ -28,10 +47,20 @@ export function hasOwnProperties<Y extends PropertyKey>(
   return isObject(obj) && propKeys.every((propKey) => propKey in obj);
 }
 
+/**
+ * __Checks if @obj is an array with at least one entry.__
+ *
+ * @param obj to check
+ */
 export function isNonEmptyArray(obj: unknown): obj is unknown[] {
   return Array.isArray(obj) && obj.length > 0;
 }
 
+/**
+ * __Checks if @obj is an array with zero entries.__
+ *
+ * @param obj to check
+ */
 export function isEmptyArray(obj: unknown): obj is unknown[] {
   return Array.isArray(obj) && obj.length === 0;
 }
@@ -39,13 +68,15 @@ export function isEmptyArray(obj: unknown): obj is unknown[] {
 /**
  * __Typeguard for enums-keys__
  *
+ * _note: not for number-enums_
+ *
  * @example
  * enum MyEnum {
  *  Thing1 = 'thing one',
  *  Thing2 = 'thing two',
  * }
  *
- * function testKeys(key: keyof typeof MyEnum) {
+ * function onlytKeys(key: keyof typeof MyEnum) {
  *   console.log(key, MyEnum[key]);
  * }
  *
@@ -53,8 +84,11 @@ export function isEmptyArray(obj: unknown): obj is unknown[] {
  *
  * if (isEnumKey(MyEnum, testStr)) {
  *   // compiler knows that testStr is of type `keyof typeof MyEnum`
- *   testKeys(testStr);
+ *   onlytKeys(testStr);
  * }
+ *
+ * @param enumType the type to check against
+ * @param value some value to check if it is a key of the given `@enumType`
  */
 export function isEnumKey<T extends Record<PropertyKey, unknown>>(
   enumType: T,
@@ -63,22 +97,21 @@ export function isEnumKey<T extends Record<PropertyKey, unknown>>(
   return Boolean(Object.keys(enumType).find((k) => k === value));
 }
 
-/**
- * https://stackoverflow.com/questions/58278652/generic-enum-type-guard
- *
- */
-export function isEnumValueGenerator<T extends Record<string, unknown>>(
-  enumType: T
-) {
-  const typeGuard = (value: unknown): value is T[keyof T] =>
-    Object.values(enumType).includes(value as T[keyof T]);
-  return typeGuard;
-}
+// initial inspiration for isEnumValue
+//
+// https://stackoverflow.com/questions/58278652/generic-enum-type-guard
+// export function isEnumValueGenerator<T extends Record<string, unknown>>(
+//   enumType: T
+// ) {
+//   const typeGuard = (value: unknown): value is T[keyof T] =>
+//     Object.values(enumType).includes(value as T[keyof T]);
+//   return typeGuard;
+// }
 
 /**
  * __Typeguard for enum values__
  *
- * @TODO: take care of number-Enums
+ * _note: not for number-enums_
  *
  * @example
  *
@@ -87,19 +120,19 @@ export function isEnumValueGenerator<T extends Record<string, unknown>>(
  *  Thing2 = 'thing two',
  * }
  *
- * function testVals(val: MyEnum) {
- *   console.log("testVals", val);
+ * function onlyVals(val: MyEnum) {
+ *   console.log("onlyVals", val);
  * }
  *
  * const testStr = "thing two";
  *
  * if (isEnumValue(MyEnum, testStr)) {
  *   // compiler knows that testStr is of type `MyEnum`
- *   testVals(testStr);
+ *   onlyVals(testStr);
  * }
  *
- * @param enumType
- * @param value
+ * @param enumType the type to check against
+ * @param value some value to check if it is a value of the given `@enumType`
  */
 export function isEnumValue<T extends Record<string, unknown>>(
   enumType: T,
