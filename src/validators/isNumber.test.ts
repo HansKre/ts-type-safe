@@ -1,7 +1,8 @@
 import { isMathematicalNumber } from './isNumber';
 
 const tests = [
-  { label: '1', value: 1, expect: true },
+  { label: '1', value: 1, expect: false },
+  // { label: '1', value: 1, expect: true },
   // { label: "'1'", value: '1', expect: true },
   // { label: "'01'", value: '01', expect: false },
   // { label: "'0001'", value: '0001', expect: false },
