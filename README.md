@@ -202,7 +202,7 @@ enum MyEnum {
  Thing2 = 'thing two',
 }
 
-function onlytKeys(key: keyof typeof MyEnum) {
+function onlyKeys(key: keyof typeof MyEnum) {
   console.log(key, MyEnum[key]);
 }
 
@@ -210,7 +210,7 @@ const testStr = "Thing2";
 
 if (isEnumKey(MyEnum, testStr)) {
   // compiler knows that testStr is of type `keyof typeof MyEnum`
-  onlytKeys(testStr);
+  onlyKeys(testStr);
 }
 ```
 <a name="module_validators..isEnumValue"></a>

@@ -76,7 +76,7 @@ export function isEmptyArray(obj: unknown): obj is unknown[] {
  *  Thing2 = 'thing two',
  * }
  *
- * function onlytKeys(key: keyof typeof MyEnum) {
+ * function onlyKeys(key: keyof typeof MyEnum) {
  *   console.log(key, MyEnum[key]);
  * }
  *
@@ -84,7 +84,7 @@ export function isEmptyArray(obj: unknown): obj is unknown[] {
  *
  * if (isEnumKey(MyEnum, testStr)) {
  *   // compiler knows that testStr is of type `keyof typeof MyEnum`
- *   onlytKeys(testStr);
+ *   onlyKeys(testStr);
  * }
  *
  * @param enumType the type to check against
