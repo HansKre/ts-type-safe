@@ -18,4 +18,4 @@ function classNames(...names: Array<string | undefined | false>) {
   return names.filter((n) => typeof n === 'string' && n.trim()).join(' ');
 }
 
-export { classNames as cns };
+export { classNames, classNames as cns };
