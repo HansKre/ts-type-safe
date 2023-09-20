@@ -38,6 +38,7 @@
     * [~Prettify<T>](#module_types..Prettify<T>) : <code>Prettify</code>
     * [~ValuesOf<T>](#module_types..ValuesOf<T>) : <code>ValuesOf</code>
     * [~KeysOf<T>](#module_types..KeysOf<T>) : <code>KeysOf</code>
+    * [~PrefixedKeys<T,](#module_types..PrefixedKeys<T,) : <code>PrefixedKeys</code>
 
 <a name="module_types..Prettify<T>"></a>
 
@@ -76,6 +77,21 @@ type FooKeys = KeysOf<typeof Foo>;
 // type FooKeys = "A" | "B"
 
 // equivalent to: type FooKeys = keyof typeof Foo;
+```
+<a name="module_types..PrefixedKeys<T,"></a>
+
+### types~PrefixedKeys<T, : <code>PrefixedKeys</code>
+<p>Helper type to generate prefixed keys of a given type</p>
+
+**Kind**: inner typedef of [<code>types</code>](#module_types)  
+**Example**  
+```js
+const Foo = { A: "a", B: "b"};
+type FooType = typeof Foo;
+// type FooType = { "A": string; "B": string; }
+
+type PrefixedFooKeys = PrefixedKeys<typeof Foo, 'foo.'>;
+// type PrefixedFooKeys = { "foo.A": string; "foo.B": string; }
 ```
 <a name="module_classNames"></a>
 

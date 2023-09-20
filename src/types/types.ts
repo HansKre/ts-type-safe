@@ -60,3 +60,23 @@ STUB = 1;
 export type KeysOf<T> = keyof T;
 
 STUB = 1;
+
+/**
+ * Helper type to generate prefixed keys of a given type
+ *
+ * @example
+ *
+ * const Foo = { A: "a", B: "b"};
+ * type FooType = typeof Foo;
+ * // type FooType = { "A": string; "B": string; }
+ *
+ * type PrefixedFooKeys = PrefixedKeys<typeof Foo, 'foo.'>;
+ * // type PrefixedFooKeys = { "foo.A": string; "foo.B": string; }
+ *
+ * @typedef {PrefixedKeys} PrefixedKeys<T, P extends string>
+ */
+export type PrefixedKeys<T, P extends string> = {
+  [K in keyof T as K extends string ? `${P}${K}` : never]: T[K];
+};
+
+STUB = 1;
