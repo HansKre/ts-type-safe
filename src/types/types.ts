@@ -80,3 +80,30 @@ export type PrefixedKeys<T, P extends string> = {
 };
 
 STUB = 1;
+
+/**
+ * Helper type to make a single property optional
+ *
+ * @example
+ *
+ * type Person = {
+ *   id: string;
+ *   name: string;
+ *   age: number;
+ * };
+ *
+ * type NewPerson = PartialBy<Person, 'id'>
+ * //    ^? type NewPerson = Omit<Person, "id"> & Partial<Pick<Person, "id">>
+ * type PrettyNewPerson = Prettify<NewPerson>;
+ * //    ^? type PrettyNewPerson = { name: string; age: number; id? : string | undefined; }
+ *
+ * @example
+ *
+ * type NewPerson = PartialBy<Person, 'id' | 'age'>;
+ * //    ^? type NewPerson = Omit<Person, "id" | "age"> & Partial<Pick<Person, "id" | "age">>
+ *
+ * @typedef {PartialBy} PartialBy<T, K extends keyof T>
+ */
+export type PartialBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
+
+STUB = 1;

@@ -39,6 +39,7 @@
     * [~ValuesOf<T>](#module_types..ValuesOf<T>) : <code>ValuesOf</code>
     * [~KeysOf<T>](#module_types..KeysOf<T>) : <code>KeysOf</code>
     * [~PrefixedKeys<T,](#module_types..PrefixedKeys<T,) : <code>PrefixedKeys</code>
+    * [~PartialBy<T,](#module_types..PartialBy<T,) : <code>PartialBy</code>
 
 <a name="module_types..Prettify<T>"></a>
 
@@ -92,6 +93,30 @@ type FooType = typeof Foo;
 
 type PrefixedFooKeys = PrefixedKeys<typeof Foo, 'foo.'>;
 // type PrefixedFooKeys = { "foo.A": string; "foo.B": string; }
+```
+<a name="module_types..PartialBy<T,"></a>
+
+### types~PartialBy<T, : <code>PartialBy</code>
+<p>Helper type to make a single property optional</p>
+
+**Kind**: inner typedef of [<code>types</code>](#module_types)  
+**Example**  
+```js
+type Person = {
+  id: string;
+  name: string;
+  age: number;
+};
+
+type NewPerson = PartialBy<Person, 'id'>
+//    ^? type NewPerson = Omit<Person, "id"> & Partial<Pick<Person, "id">>
+type PrettyNewPerson = Prettify<NewPerson>;
+//    ^? type PrettyNewPerson = { name: string; age: number; id? : string | undefined; }
+```
+**Example**  
+```js
+type NewPerson = PartialBy<Person, 'id' | 'age'>;
+//   ^? type NewPerson = Omit<Person, "id" | "age"> & Partial<Pick<Person, "id" | "age">>
 ```
 <a name="module_classNames"></a>
 
@@ -275,4 +300,4 @@ if (isEnumValue(MyEnum, testStr)) {
 
 * * *
 
-&copy; 2023 Hans Krebs
+&copy; 2024 Hans Krebs
