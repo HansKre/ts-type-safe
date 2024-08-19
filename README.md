@@ -38,6 +38,7 @@
     * [~Prettify<T>](#module_types..Prettify<T>) : <code>Prettify</code>
     * [~ValuesOf<T>](#module_types..ValuesOf<T>) : <code>ValuesOf</code>
     * [~KeysOf<T>](#module_types..KeysOf<T>) : <code>KeysOf</code>
+    * [~KeysOfWithNestedPrefix<TBase,](#module_types..KeysOfWithNestedPrefix<TBase,) : <code>KeysOfWithNestedPrefix</code>
     * [~PrefixedKeys<T,](#module_types..PrefixedKeys<T,) : <code>PrefixedKeys</code>
     * [~PartialBy<T,](#module_types..PartialBy<T,) : <code>PartialBy</code>
 
@@ -70,6 +71,17 @@ const Foo = { A: "a", B: "b"} as const;type FooVals = ValuesOf<typeof Foo>;// 
 **Example**  
 ```js
 const Foo = { A: "a", B: "b"};type FooKeys = KeysOf<typeof Foo>;// type FooKeys = "A" | "B"// equivalent to: type FooKeys = keyof typeof Foo;
+```
+<a name="module_types..KeysOfWithNestedPrefix<TBase,"></a>
+
+### types~KeysOfWithNestedPrefix<TBase, : <code>KeysOfWithNestedPrefix</code>
+<p>Helper type to generate a new type holding all the keys of a given type including the nested keys which are prefixed by the parent property's key.</p>
+<p>IMPORTANT: works only for nested objects which are not optional or potentially undefined!</p>
+
+**Kind**: inner typedef of [<code>types</code>](#module_types)  
+**Example**  
+```js
+type Settings = {  org: string;  repo?: string;  owner: {      profileUrl?: string;      contact: {        name: string;        mail: string;      };  };};type SettingKey = KeysOfWithNestedPrefix<Settings>;// type SettingKey = "org" | "owner" | "owner.contact" | "owner.contact.name" | "owner.contact.mail" | "owner.profileUrl" | "repo";
 ```
 <a name="module_types..PrefixedKeys<T,"></a>
 
@@ -249,4 +261,4 @@ enum MyEnum { Thing1 = 'thing one', Thing2 = 'thing two',}function onlyVals
 
 * * *
 
-&copy; 2023 Hans Krebs
+&copy; 2024 Hans Krebs
