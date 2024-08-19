@@ -59,11 +59,7 @@
 **Kind**: inner typedef of [<code>types</code>](#module_types)  
 **Example**  
 ```js
-const Foo = { A: "a", B: "b"} as const;
-type FooVals = ValuesOf<typeof Foo>;
-// type FooVals = "a" | "b"
-
-// equivalent to: type FooVals = (typeof Foo)[keyof typeof Foo];
+const Foo = { A: "a", B: "b"} as const;type FooVals = ValuesOf<typeof Foo>;// type FooVals = "a" | "b"// equivalent to: type FooVals = (typeof Foo)[keyof typeof Foo];
 ```
 <a name="module_types..KeysOf<T>"></a>
 
@@ -73,11 +69,7 @@ type FooVals = ValuesOf<typeof Foo>;
 **Kind**: inner typedef of [<code>types</code>](#module_types)  
 **Example**  
 ```js
-const Foo = { A: "a", B: "b"};
-type FooKeys = KeysOf<typeof Foo>;
-// type FooKeys = "A" | "B"
-
-// equivalent to: type FooKeys = keyof typeof Foo;
+const Foo = { A: "a", B: "b"};type FooKeys = KeysOf<typeof Foo>;// type FooKeys = "A" | "B"// equivalent to: type FooKeys = keyof typeof Foo;
 ```
 <a name="module_types..PrefixedKeys<T,"></a>
 
@@ -87,12 +79,7 @@ type FooKeys = KeysOf<typeof Foo>;
 **Kind**: inner typedef of [<code>types</code>](#module_types)  
 **Example**  
 ```js
-const Foo = { A: "a", B: "b"};
-type FooType = typeof Foo;
-// type FooType = { "A": string; "B": string; }
-
-type PrefixedFooKeys = PrefixedKeys<typeof Foo, 'foo.'>;
-// type PrefixedFooKeys = { "foo.A": string; "foo.B": string; }
+const Foo = { A: "a", B: "b"};type FooType = typeof Foo;// type FooType = { "A": string; "B": string; }type PrefixedFooKeys = PrefixedKeys<typeof Foo, 'foo.'>;// type PrefixedFooKeys = { "foo.A": string; "foo.B": string; }
 ```
 <a name="module_types..PartialBy<T,"></a>
 
@@ -102,21 +89,11 @@ type PrefixedFooKeys = PrefixedKeys<typeof Foo, 'foo.'>;
 **Kind**: inner typedef of [<code>types</code>](#module_types)  
 **Example**  
 ```js
-type Person = {
-  id: string;
-  name: string;
-  age: number;
-};
-
-type NewPerson = PartialBy<Person, 'id'>
-//    ^? type NewPerson = Omit<Person, "id"> & Partial<Pick<Person, "id">>
-type PrettyNewPerson = Prettify<NewPerson>;
-//    ^? type PrettyNewPerson = { name: string; age: number; id? : string | undefined; }
+type Person = {  id: string;  name: string;  age: number;};type NewPerson = PartialBy<Person, 'id'>//    ^? type NewPerson = Omit<Person, "id"> & Partial<Pick<Person, "id">>type PrettyNewPerson = Prettify<NewPerson>;//    ^? type PrettyNewPerson = { name: string; age: number; id? : string | undefined; }
 ```
 **Example**  
 ```js
-type NewPerson = PartialBy<Person, 'id' | 'age'>;
-//   ^? type NewPerson = Omit<Person, "id" | "age"> & Partial<Pick<Person, "id" | "age">>
+type NewPerson = PartialBy<Person, 'id' | 'age'>;//    ^? type NewPerson = Omit<Person, "id" | "age"> & Partial<Pick<Person, "id" | "age">>
 ```
 <a name="module_classNames"></a>
 
@@ -238,21 +215,7 @@ type NewPerson = PartialBy<Person, 'id' | 'age'>;
 
 **Example**  
 ```js
-enum MyEnum {
- Thing1 = 'thing one',
- Thing2 = 'thing two',
-}
-
-function onlyKeys(key: keyof typeof MyEnum) {
-  console.log(key, MyEnum[key]);
-}
-
-const testStr = "Thing2";
-
-if (isEnumKey(MyEnum, testStr)) {
-  // compiler knows that testStr is of type `keyof typeof MyEnum`
-  onlyKeys(testStr);
-}
+enum MyEnum { Thing1 = 'thing one', Thing2 = 'thing two',}function onlyKeys(key: keyof typeof MyEnum) {  console.log(key, MyEnum[key]);}const testStr = "Thing2";if (isEnumKey(MyEnum, testStr)) {  // compiler knows that testStr is of type `keyof typeof MyEnum`  onlyKeys(testStr);}
 ```
 <a name="module_validators..isEnumValue"></a>
 
@@ -269,21 +232,7 @@ if (isEnumKey(MyEnum, testStr)) {
 
 **Example**  
 ```js
-enum MyEnum {
- Thing1 = 'thing one',
- Thing2 = 'thing two',
-}
-
-function onlyVals(val: MyEnum) {
-  console.log("onlyVals", val);
-}
-
-const testStr = "thing two";
-
-if (isEnumValue(MyEnum, testStr)) {
-  // compiler knows that testStr is of type `MyEnum`
-  onlyVals(testStr);
-}
+enum MyEnum { Thing1 = 'thing one', Thing2 = 'thing two',}function onlyVals(val: MyEnum) {  console.log("onlyVals", val);}const testStr = "thing two";if (isEnumValue(MyEnum, testStr)) {  // compiler knows that testStr is of type `MyEnum`  onlyVals(testStr);}
 ```
 <a name="isMathematicalNumber"></a>
 
@@ -300,4 +249,4 @@ if (isEnumValue(MyEnum, testStr)) {
 
 * * *
 
-&copy; 2024 Hans Krebs
+&copy; 2023 Hans Krebs
