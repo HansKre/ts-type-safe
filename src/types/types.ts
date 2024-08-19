@@ -62,6 +62,41 @@ export type KeysOf<T> = keyof T;
 STUB = 1;
 
 /**
+ * Helper type to generate a new type holding all the keys of a given type including the nested keys which are prefixed by the parent property's key.
+ *
+ * IMPORTANT: works only for nested objects which are not optional or potentially undefined!
+ *
+ * @example
+ *
+ * type Settings = {
+ *   org: string;
+ *   repo?: string;
+ *   owner: {
+ *       profileUrl?: string;
+ *       contact: {
+ *         name: string;
+ *         mail: string;
+ *       };
+ *   };
+ * };
+ * type SettingKey = KeysOfWithNestedPrefix<Settings>;
+ * // type SettingKey = "org" | "owner" | "owner.contact" | "owner.contact.name" | "owner.contact.mail" | "owner.profileUrl" | "repo";
+ *
+ * @typedef {KeysOfWithNestedPrefix} KeysOfWithNestedPrefix<TBase, TPrefix extends string = ''>
+ */
+export type KeysOfWithNestedPrefix<TBase, TPrefix extends string = ''> = {
+  [K in keyof TBase]-?: TBase[K] extends object
+    ? K extends string
+      ? `${TPrefix}${K}` | KeysOfWithNestedPrefix<TBase[K], `${TPrefix}${K}.`>
+      : never
+    : K extends string
+    ? `${TPrefix}${K}`
+    : never;
+}[keyof TBase];
+
+STUB = 1;
+
+/**
  * Helper type to generate prefixed keys of a given type
  *
  * @example
