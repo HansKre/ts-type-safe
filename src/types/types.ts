@@ -61,6 +61,39 @@ export type DeepRequired<T> = T extends Function
 STUB = 1;
 
 /**
+ * Helper type to recursively make all child properties partial.
+ *
+ * @example
+ *
+ * type Foo = {
+ *     bar: string;
+ *     baz: {
+ *         foo: [
+ *             bam: string;
+ *         ]
+ *     }
+ * }
+ *
+ * type Foo2 = DeepPartial<Foo>;
+ *
+ * // type Foo2 = {
+ * //     bar?: string | undefined;
+ * //     baz?: {
+ * //         foo?: [bam?: string | undefined] | undefined;
+ * //     } | undefined;
+ * // }
+ *
+ * @typedef {DeepPartial} DeepPartial<T>
+ */
+export type DeepPartial<T> = T extends object
+  ? {
+      [P in keyof T]?: DeepPartial<T[P]>;
+    }
+  : T;
+
+STUB = 1;
+
+/**
  * Helper type to generate values of a given type
  *
  * NOTE: not for enum-types!
