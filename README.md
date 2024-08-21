@@ -37,6 +37,7 @@
 * [types](#module_types)
     * [~Prettify<T>](#module_types..Prettify<T>) : <code>Prettify</code>
     * [~DeepRequired<T>](#module_types..DeepRequired<T>) : <code>DeepRequired</code>
+    * [~DeepPartial<T>](#module_types..DeepPartial<T>) : <code>DeepPartial</code>
     * [~ValuesOf<T>](#module_types..ValuesOf<T>) : <code>ValuesOf</code>
     * [~KeysOf<T>](#module_types..KeysOf<T>) : <code>KeysOf</code>
     * [~DeepKeysOf<TBase,](#module_types..DeepKeysOf<TBase,) : <code>DeepKeysOf</code>
@@ -58,6 +59,16 @@
 **Example**  
 ```js
 type Settings = {  org: string;  repo?: string;  owner?: {      profileUrl?: string;      contact: {        name: string;        mail: string;      } | undefined;  };};type ReqSettings = DeepRequired<Settings>;// type ReqSettings = {//     org: string;//     repo: string;//     owner: {//         profileUrl: string;//         contact: {//             name: string;//             mail: string;//         };//     };// }
+```
+<a name="module_types..DeepPartial<T>"></a>
+
+### types~DeepPartial<T> : <code>DeepPartial</code>
+<p>Helper type to recursively make all child properties partial.</p>
+
+**Kind**: inner typedef of [<code>types</code>](#module_types)  
+**Example**  
+```js
+type Foo = {    bar: string;    baz: {        foo: [            bam: string;        ]    }}type Foo2 = DeepPartial<Foo>;// type Foo2 = {//     bar?: string | undefined;//     baz?: {//         foo?: [bam?: string | undefined] | undefined;//     } | undefined;// }
 ```
 <a name="module_types..ValuesOf<T>"></a>
 
@@ -86,12 +97,12 @@ const Foo = { A: "a", B: "b"};type FooKeys = KeysOf<typeof Foo>;// type FooKey
 <a name="module_types..DeepKeysOf<TBase,"></a>
 
 ### types~DeepKeysOf<TBase, : <code>DeepKeysOf</code>
-<p>Helper type recursively generates a union type of all keys of a given type. The nested keys are prefixed by the parent property's key.</p>
+<p>Helper type recursively generates a union type of all keys of a given type. The nested keys are prefixed by the parent property's key. Array elements are indexed.</p>
 
 **Kind**: inner typedef of [<code>types</code>](#module_types)  
 **Example**  
 ```js
-type Settings = {  org: string;  repo?: string;  owner?: {      profileUrl?: string;      contact: {        name: string;        mail: string;      } | undefined;  };};type SettingKey = DeepKeysOf<Settings>;// type SettingKey = "org" | "owner" | "owner.contact" | "owner.contact.name" | "owner.contact.mail" | "owner.profileUrl" | "repo";TypeScript Playground Link: https://www.typescriptlang.org/pt/play/?#code/C4TwDgpgBA0hIGcDyAzA6gS2ACwHIQWAgBMAFAJwhQwA8AeAFQCEBDBCAGigYqtqgg0iAO2IIohchmEBzKAF4oAciUA+BVADeAKChQA2jCjSoAa3gB7FN1bsAugFoA-AC4bbCIbsChEUeIsAIwArCABjYF09KCdYHxExCWApWSjomKgAAwASTR5KahoAX1yYIsyoAB9YeGR0LDwCIjIC2kZbTxg7Lhy83kKSzTKAOkzVNOi3YQgANwhyCbcjQQTxSWkZCdje-L5i0vLFqGm58gBubSL9cxArd3sL7VBIKABlCGBgDfFFHT0LcgyNzrWQXPSUMAWVxJFIyMFQCwAd2m5Ghf3SUDA5CsGAANhAAKrkXHQkFwiZ6MIWYTAFgRNzojHHFgAWwgwOSG3hTJZLDxHNh3OiRSqUAArqI+NNiPCihc5donuBoAARCAQMAAJQgAEcxRhKMRGOpFAx4n5EgAxCURDDUqKxBhRNxmlYW8QAQXI5BYIDo0hQ8ygBPGeliXp9frVGu1eoNJDoIdDUBd5v8CJC4UiYa0BiMJhudwYjmh0a1uv1hrouGpuDFuNxLEC+MYXlU6iKzu4j2e0Fj70+3w0ZdjlYTA6+sgQqh7yreH0nMjgIA0y7qmBw+EIJH6bRHFfjRon33bjypwkIEgXG2XbmPsmXGgAREiUcNz7SIsNeXin2cgA
+type Settings = {  org: string;  repo?: string;  owner?: {      profileUrl?: string;      contact: {        name: string;        mail: string;      } | undefined;  };  messages: {    title: string;    body: string;  }[];};type SettingKey = DeepKeysOf<Settings>;// type SettingKey = "org" | "owner" | "owner.contact" | "owner.contact.name" | "owner.contact.mail" | "owner.profileUrl" | "repo" | "messages" | "messages[0]" | "messages[0].title" | "messages[0].body";TypeScript Playground Link: https://www.typescriptlang.org/pt/play/?#code/KYDwDg9gTgLgBDAnmYcAixhgErAI4CuAllMACYA8AKgHxwC8cVcoMwAdmQM5wBiB7AMYwiEdgCg4cAPxNJcAFxMWINpx4BBKFACGiCkXYAzYFDgBVGvNlbd+jFlyES5CpatSlzVh25wIAEYAVsDC1nAA3nAA2gDScIZwANbAiBBGTAC6ALTSSg44+MSklAByYqUEADZVOgFVwNRxmTR0AL7yXgDc4uJIKOiYYLGpXADyRgASwFUoUNQAQjpcwAA0TAAKpEZEICpqflwwUIYA5gxwAESXdIwR8nEJ7Mmp6UxLKzl578vAzfu+HgACkMJjM5gAlNFMvIpLJzAD1P5gqEYLCpDJ0RiMQAfOAAAwAJBEqFtgDsQG1ifEAGRwI4ndinNr4rHYuB4okkskUqkRWn045nNrRYnsAgAWwCpjamVZ7PZeIKI0Q4ymMzmbnWXNJ212fIFDOFooi4qlMsyADp8R52UodTz9dS4HSjUyRWLJdKoLL5RivB8-rFMoi-IEQmEFdI2djOcTdeSnfyXYLGcy-QqpEqhiq1dNZqZFr9mtr447Kc7XUL3dbbdj7WW9RXk1W0yyeiKUmkMlRA5keuJQJBYAhkKhlaMJtRboMsLmJvnNQUnMVXLQaAP+qgAMrAGAiJk8O7yaCnJRu049KSkSDfC9X-wAd3Ypm+9wVYCg6SIDXMUCqd7VpebKCGIMA6MISjvpm7A6BKwDnkBD4KhKOg-ohabIRibQcnAAhkImL5kA+bQPvBXBcDopzAFwb6wiIMANBhZzIQEEBkIgzFMiR0IdpuY5wLu+5nCqFwTqqU5CQepxcBuvSgewRz0nu0kqgAjEoUkiakFyXBAz6mJaCngcIlqoT+lw9ApSkrMJTIqgATJpKnaYgunkZR1FcNEakOQAzFaDENJZQA
 ```
 <a name="module_types..PrefixedKeys<T,"></a>
 

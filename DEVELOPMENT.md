@@ -6,10 +6,13 @@
 npm install
 # make code changes
 # commit & push code
-# bump lib-version in package.json
+# to bump lib-version in package.json, run:
 npm version patch #patch|minor|major
 npm login
-# npm run build <-- not needed if prepare-script exists and does that
+# npm run build: not needed if prepare-script exists and does that,
+# but this might update README.md and to avoid changes to README.md which have to
+# be committed AFTER npm publish, you might want to run it yourself
+npm run build
 npm publish
 ```
 
