@@ -104,17 +104,22 @@ STUB = 1;
 
 // Below type does not work with nested optional or undefined properties, hence it is an intermediate helper to be composed with DeepRequired
 type DeepKeysOfHelper<TBase, TPrefix extends string = ''> = {
-  [K in keyof TBase]-?: TBase[K] extends object
-    ? K extends string
-      ? `${TPrefix}${K}` | DeepKeysOfHelper<TBase[K], `${TPrefix}${K}.`>
-      : never
-    : K extends string
-    ? `${TPrefix}${K}`
-    : never;
+  [K in keyof TBase]-?: TBase[K] extends (infer U)[]
+    ? U extends object
+      ?
+          | `${TPrefix}${K & string}`
+          | `${TPrefix}${K & string}[${number}]`
+          | DeepKeysOfHelper<U, `${TPrefix}${K & string}[${number}].`>
+      : `${TPrefix}${K & string}[${number}]`
+    : TBase[K] extends object
+    ?
+        | `${TPrefix}${K & string}`
+        | DeepKeysOfHelper<TBase[K], `${TPrefix}${K & string}.`>
+    : `${TPrefix}${K & string}`;
 }[keyof TBase];
 
 /**
- * Helper type recursively generates a union type of all keys of a given type. The nested keys are prefixed by the parent property's key.
+ * Helper type recursively generates a union type of all keys of a given type. The nested keys are prefixed by the parent property's key. Array elements are indexed.
  *
  * @example
  *
@@ -128,11 +133,15 @@ type DeepKeysOfHelper<TBase, TPrefix extends string = ''> = {
  *         mail: string;
  *       } | undefined;
  *   };
+ *   messages: {
+ *     title: string;
+ *     body: string;
+ *   }[];
  * };
  * type SettingKey = DeepKeysOf<Settings>;
- * // type SettingKey = "org" | "owner" | "owner.contact" | "owner.contact.name" | "owner.contact.mail" | "owner.profileUrl" | "repo";
+ * // type SettingKey = "org" | "owner" | "owner.contact" | "owner.contact.name" | "owner.contact.mail" | "owner.profileUrl" | "repo" | "messages" | "messages[0]" | "messages[0].title" | "messages[0].body";
  *
- * TypeScript Playground Link: https://www.typescriptlang.org/pt/play/?#code/C4TwDgpgBA0hIGcDyAzA6gS2ACwHIQWAgBMAFAJwhQwA8AeAFQCEBDBCAGigYqtqgg0iAO2IIohchmEBzKAF4oAciUA+BVADeAKChQA2jCjSoAa3gB7FN1bsAugFoA-AC4bbCIbsChEUeIsAIwArCABjYF09KCdYHxExCWApWSjomKgAAwASTR5KahoAX1yYIsyoAB9YeGR0LDwCIjIC2kZbTxg7Lhy83kKSzTKAOkzVNOi3YQgANwhyCbcjQQTxSWkZCdje-L5i0vLFqGm58gBubSL9cxArd3sL7VBIKABlCGBgDfFFHT0LcgyNzrWQXPSUMAWVxJFIyMFQCwAd2m5Ghf3SUDA5CsGAANhAAKrkXHQkFwiZ6MIWYTAFgRNzojHHFgAWwgwOSG3hTJZLDxHNh3OiRSqUAArqI+NNiPCihc5donuBoAARCAQMAAJQgAEcxRhKMRGOpFAx4n5EgAxCURDDUqKxBhRNxmlYW8QAQXI5BYIDo0hQ8ygBPGeliXp9frVGu1eoNJDoIdDUBd5v8CJC4UiYa0BiMJhudwYjmh0a1uv1hrouGpuDFuNxLEC+MYXlU6iKzu4j2e0Fj70+3w0ZdjlYTA6+sgQqh7yreH0nMjgIA0y7qmBw+EIJH6bRHFfjRon33bjypwkIEgXG2XbmPsmXGgAREiUcNz7SIsNeXin2cgA
+ * TypeScript Playground Link: https://www.typescriptlang.org/pt/play/?#code/KYDwDg9gTgLgBDAnmYcAixhgErAI4CuAllMACYA8AKgHxwC8cVcoMwAdmQM5wBiB7AMYwiEdgCg4cAPxNJcAFxMWINpx4BBKFACGiCkXYAzYFDgBVGvNlbd+jFlyES5CpatSlzVh25wIAEYAVsDC1nAA3nAA2gDScIZwANbAiBBGTAC6ALTSSg44+MSklAByYqUEADZVOgFVwNRxmTR0AL7yXgDc4uJIKOiYYLGpXADyRgASwFUoUNQAQjpcwAA0TAAKpEZEICpqflwwUIYA5gxwAESXdIwR8nEJ7Mmp6UxLKzl578vAzfu+HgACkMJjM5gAlNFMvIpLJzAD1P5gqEYLCpDJ0RiMQAfOAAAwAJBEqFtgDsQG1ifEAGRwI4ndinNr4rHYuB4okkskUqkRWn045nNrRYnsAgAWwCpjamVZ7PZeIKI0Q4ymMzmbnWXNJ212fIFDOFooi4qlMsyADp8R52UodTz9dS4HSjUyRWLJdKoLL5RivB8-rFMoi-IEQmEFdI2djOcTdeSnfyXYLGcy-QqpEqhiq1dNZqZFr9mtr447Kc7XUL3dbbdj7WW9RXk1W0yyeiKUmkMlRA5keuJQJBYAhkKhlaMJtRboMsLmJvnNQUnMVXLQaAP+qgAMrAGAiJk8O7yaCnJRu049KSkSDfC9X-wAd3Ypm+9wVYCg6SIDXMUCqd7VpebKCGIMA6MISjvpm7A6BKwDnkBD4KhKOg-ohabIRibQcnAAhkImL5kA+bQPvBXBcDopzAFwb6wiIMANBhZzIQEEBkIgzFMiR0IdpuY5wLu+5nCqFwTqqU5CQepxcBuvSgewRz0nu0kqgAjEoUkiakFyXBAz6mJaCngcIlqoT+lw9ApSkrMJTIqgATJpKnaYgunkZR1FcNEakOQAzFaDENJZQA
  *
  * @typedef {DeepKeysOf} DeepKeysOf<TBase, TPrefix extends string = ''>
  */
