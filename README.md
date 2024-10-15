@@ -43,6 +43,7 @@
     * [~DeepKeysOf<TBase,](#module_types..DeepKeysOf<TBase,) : <code>DeepKeysOf</code>
     * [~PrefixedKeys<T,](#module_types..PrefixedKeys<T,) : <code>PrefixedKeys</code>
     * [~PartialBy<T,](#module_types..PartialBy<T,) : <code>PartialBy</code>
+    * [~RequiredBy<T,](#module_types..RequiredBy<T,) : <code>RequiredBy</code>
 
 <a name="module_types..Prettify<T>"></a>
 
@@ -58,7 +59,29 @@
 **Kind**: inner typedef of [<code>types</code>](#module_types)  
 **Example**  
 ```js
-type Settings = {  org: string;  repo?: string;  owner?: {      profileUrl?: string;      contact: {        name: string;        mail: string;      } | undefined;  };};type ReqSettings = DeepRequired<Settings>;// type ReqSettings = {//     org: string;//     repo: string;//     owner: {//         profileUrl: string;//         contact: {//             name: string;//             mail: string;//         };//     };// }
+type Settings = {
+  org: string;
+  repo?: string;
+  owner?: {
+      profileUrl?: string;
+      contact: {
+        name: string;
+        mail: string;
+      } | undefined;
+  };
+};
+type ReqSettings = DeepRequired<Settings>;
+// type ReqSettings = {
+//     org: string;
+//     repo: string;
+//     owner: {
+//         profileUrl: string;
+//         contact: {
+//             name: string;
+//             mail: string;
+//         };
+//     };
+// }
 ```
 <a name="module_types..DeepPartial<T>"></a>
 
@@ -68,7 +91,23 @@ type Settings = {  org: string;  repo?: string;  owner?: {      profileUrl?:
 **Kind**: inner typedef of [<code>types</code>](#module_types)  
 **Example**  
 ```js
-type Foo = {    bar: string;    baz: {        foo: [            bam: string;        ]    }}type Foo2 = DeepPartial<Foo>;// type Foo2 = {//     bar?: string | undefined;//     baz?: {//         foo?: [bam?: string | undefined] | undefined;//     } | undefined;// }
+type Foo = {
+    bar: string;
+    baz: {
+        foo: [
+            bam: string;
+        ]
+    }
+}
+
+type Foo2 = DeepPartial<Foo>;
+
+// type Foo2 = {
+//     bar?: string | undefined;
+//     baz?: {
+//         foo?: [bam?: string | undefined] | undefined;
+//     } | undefined;
+// }
 ```
 <a name="module_types..ValuesOf<T>"></a>
 
@@ -82,7 +121,11 @@ type Foo = {    bar: string;    baz: {        foo: [            bam: string;
 **Kind**: inner typedef of [<code>types</code>](#module_types)  
 **Example**  
 ```js
-const Foo = { A: "a", B: "b"} as const;type FooVals = ValuesOf<typeof Foo>;// type FooVals = "a" | "b"// equivalent to: type FooVals = (typeof Foo)[keyof typeof Foo];
+const Foo = { A: "a", B: "b"} as const;
+type FooVals = ValuesOf<typeof Foo>;
+// type FooVals = "a" | "b"
+
+// equivalent to: type FooVals = (typeof Foo)[keyof typeof Foo];
 ```
 <a name="module_types..KeysOf<T>"></a>
 
@@ -92,7 +135,11 @@ const Foo = { A: "a", B: "b"} as const;type FooVals = ValuesOf<typeof Foo>;// 
 **Kind**: inner typedef of [<code>types</code>](#module_types)  
 **Example**  
 ```js
-const Foo = { A: "a", B: "b"};type FooKeys = KeysOf<typeof Foo>;// type FooKeys = "A" | "B"// equivalent to: type FooKeys = keyof typeof Foo;
+const Foo = { A: "a", B: "b"};
+type FooKeys = KeysOf<typeof Foo>;
+// type FooKeys = "A" | "B"
+
+// equivalent to: type FooKeys = keyof typeof Foo;
 ```
 <a name="module_types..DeepKeysOf<TBase,"></a>
 
@@ -102,7 +149,25 @@ const Foo = { A: "a", B: "b"};type FooKeys = KeysOf<typeof Foo>;// type FooKey
 **Kind**: inner typedef of [<code>types</code>](#module_types)  
 **Example**  
 ```js
-type Settings = {  org: string;  repo?: string;  owner?: {      profileUrl?: string;      contact: {        name: string;        mail: string;      } | undefined;  };  messages: {    title: string;    body: string;  }[];};type SettingKey = DeepKeysOf<Settings>;// type SettingKey = "org" | "owner" | "owner.contact" | "owner.contact.name" | "owner.contact.mail" | "owner.profileUrl" | "repo" | "messages" | "messages[0]" | "messages[0].title" | "messages[0].body";TypeScript Playground Link: https://www.typescriptlang.org/pt/play/?#code/KYDwDg9gTgLgBDAnmYcAixhgErAI4CuAllMACYA8AKgHxwC8cVcoMwAdmQM5wBiB7AMYwiEdgCg4cAPxNJcAFxMWINpx4BBKFACGiCkXYAzYFDgBVGvNlbd+jFlyES5CpatSlzVh25wIAEYAVsDC1nAA3nAA2gDScIZwANbAiBBGTAC6ALTSSg44+MSklAByYqUEADZVOgFVwNRxmTR0AL7yXgDc4uJIKOiYYLGpXADyRgASwFUoUNQAQjpcwAA0TAAKpEZEICpqflwwUIYA5gxwAESXdIwR8nEJ7Mmp6UxLKzl578vAzfu+HgACkMJjM5gAlNFMvIpLJzAD1P5gqEYLCpDJ0RiMQAfOAAAwAJBEqFtgDsQG1ifEAGRwI4ndinNr4rHYuB4okkskUqkRWn045nNrRYnsAgAWwCpjamVZ7PZeIKI0Q4ymMzmbnWXNJ212fIFDOFooi4qlMsyADp8R52UodTz9dS4HSjUyRWLJdKoLL5RivB8-rFMoi-IEQmEFdI2djOcTdeSnfyXYLGcy-QqpEqhiq1dNZqZFr9mtr447Kc7XUL3dbbdj7WW9RXk1W0yyeiKUmkMlRA5keuJQJBYAhkKhlaMJtRboMsLmJvnNQUnMVXLQaAP+qgAMrAGAiJk8O7yaCnJRu049KSkSDfC9X-wAd3Ypm+9wVYCg6SIDXMUCqd7VpebKCGIMA6MISjvpm7A6BKwDnkBD4KhKOg-ohabIRibQcnAAhkImL5kA+bQPvBXBcDopzAFwb6wiIMANBhZzIQEEBkIgzFMiR0IdpuY5wLu+5nCqFwTqqU5CQepxcBuvSgewRz0nu0kqgAjEoUkiakFyXBAz6mJaCngcIlqoT+lw9ApSkrMJTIqgATJpKnaYgunkZR1FcNEakOQAzFaDENJZQA
+type Settings = {
+  org: string;
+  repo?: string;
+  owner?: {
+      profileUrl?: string;
+      contact: {
+        name: string;
+        mail: string;
+      } | undefined;
+  };
+  messages: {
+    title: string;
+    body: string;
+  }[];
+};
+type SettingKey = DeepKeysOf<Settings>;
+// type SettingKey = "org" | "owner" | "owner.contact" | "owner.contact.name" | "owner.contact.mail" | "owner.profileUrl" | "repo" | "messages" | "messages[0]" | "messages[0].title" | "messages[0].body";
+
+TypeScript Playground Link: https://www.typescriptlang.org/pt/play/?#code/KYDwDg9gTgLgBDAnmYcAixhgErAI4CuAllMACYA8AKgHxwC8cVcoMwAdmQM5wBiB7AMYwiEdgCg4cAPxNJcAFxMWINpx4BBKFACGiCkXYAzYFDgBVGvNlbd+jFlyES5CpatSlzVh25wIAEYAVsDC1nAA3nAA2gDScIZwANbAiBBGTAC6ALTSSg44+MSklAByYqUEADZVOgFVwNRxmTR0AL7yXgDc4uJIKOiYYLGpXADyRgASwFUoUNQAQjpcwAA0TAAKpEZEICpqflwwUIYA5gxwAESXdIwR8nEJ7Mmp6UxLKzl578vAzfu+HgACkMJjM5gAlNFMvIpLJzAD1P5gqEYLCpDJ0RiMQAfOAAAwAJBEqFtgDsQG1ifEAGRwI4ndinNr4rHYuB4okkskUqkRWn045nNrRYnsAgAWwCpjamVZ7PZeIKI0Q4ymMzmbnWXNJ212fIFDOFooi4qlMsyADp8R52UodTz9dS4HSjUyRWLJdKoLL5RivB8-rFMoi-IEQmEFdI2djOcTdeSnfyXYLGcy-QqpEqhiq1dNZqZFr9mtr447Kc7XUL3dbbdj7WW9RXk1W0yyeiKUmkMlRA5keuJQJBYAhkKhlaMJtRboMsLmJvnNQUnMVXLQaAP+qgAMrAGAiJk8O7yaCnJRu049KSkSDfC9X-wAd3Ypm+9wVYCg6SIDXMUCqd7VpebKCGIMA6MISjvpm7A6BKwDnkBD4KhKOg-ohabIRibQcnAAhkImL5kA+bQPvBXBcDopzAFwb6wiIMANBhZzIQEEBkIgzFMiR0IdpuY5wLu+5nCqFwTqqU5CQepxcBuvSgewRz0nu0kqgAjEoUkiakFyXBAz6mJaCngcIlqoT+lw9ApSkrMJTIqgATJpKnaYgunkZR1FcNEakOQAzFaDENJZQA
 ```
 <a name="module_types..PrefixedKeys<T,"></a>
 
@@ -112,21 +177,55 @@ type Settings = {  org: string;  repo?: string;  owner?: {      profileUrl?:
 **Kind**: inner typedef of [<code>types</code>](#module_types)  
 **Example**  
 ```js
-const Foo = { A: "a", B: "b"};type FooType = typeof Foo;// type FooType = { "A": string; "B": string; }type PrefixedFooKeys = PrefixedKeys<typeof Foo, 'foo.'>;// type PrefixedFooKeys = { "foo.A": string; "foo.B": string; }
+const Foo = { A: "a", B: "b"};
+type FooType = typeof Foo;
+// type FooType = { "A": string; "B": string; }
+
+type PrefixedFooKeys = PrefixedKeys<typeof Foo, 'foo.'>;
+// type PrefixedFooKeys = { "foo.A": string; "foo.B": string; }
 ```
 <a name="module_types..PartialBy<T,"></a>
 
 ### types~PartialBy<T, : <code>PartialBy</code>
-<p>Helper type to make a single property optional</p>
+<p>Helper type to make selected properties optional</p>
 
 **Kind**: inner typedef of [<code>types</code>](#module_types)  
 **Example**  
 ```js
-type Person = {  id: string;  name: string;  age: number;};type NewPerson = PartialBy<Person, 'id'>//    ^? type NewPerson = Omit<Person, "id"> & Partial<Pick<Person, "id">>type PrettyNewPerson = Prettify<NewPerson>;//    ^? type PrettyNewPerson = { name: string; age: number; id? : string | undefined; }
+type Person = {
+  id: string;
+  name: string;
+  age: number;
+};
+
+type NewPerson = PartialBy<Person, 'id'>
+//    ^? type NewPerson = Omit<Person, "id"> & Partial<Pick<Person, "id">>
+type PrettyNewPerson = Prettify<NewPerson>;
+//    ^? type PrettyNewPerson = { name: string; age: number; id? : string | undefined; }
 ```
 **Example**  
 ```js
-type NewPerson = PartialBy<Person, 'id' | 'age'>;//    ^? type NewPerson = Omit<Person, "id" | "age"> & Partial<Pick<Person, "id" | "age">>
+type NewPerson = PartialBy<Person, 'id' | 'age'>;
+//    ^? type NewPerson = Omit<Person, "id" | "age"> & Partial<Pick<Person, "id" | "age">>
+```
+<a name="module_types..RequiredBy<T,"></a>
+
+### types~RequiredBy<T, : <code>RequiredBy</code>
+<p>Helper type to make selected properties required</p>
+
+**Kind**: inner typedef of [<code>types</code>](#module_types)  
+**Example**  
+```js
+type Person = {
+  id?: string;
+  name?: string;
+  age?: number;
+};
+
+type NewPerson = RequiredBy<Person, 'id' | 'name'>
+//    ^? type NewPerson = Omit<Person, "id" | "name"> & Required<Pick<Person, "id" | "name">>
+type PrettyNewPerson = Prettify<NewPerson>;
+//    ^? type PrettyNewPerson = { name: string; age: number; id? : string | undefined; }
 ```
 <a name="module_classNames"></a>
 
@@ -248,7 +347,21 @@ type NewPerson = PartialBy<Person, 'id' | 'age'>;//    ^? type NewPerson = Omit
 
 **Example**  
 ```js
-enum MyEnum { Thing1 = 'thing one', Thing2 = 'thing two',}function onlyKeys(key: keyof typeof MyEnum) {  console.log(key, MyEnum[key]);}const testStr = "Thing2";if (isEnumKey(MyEnum, testStr)) {  // compiler knows that testStr is of type `keyof typeof MyEnum`  onlyKeys(testStr);}
+enum MyEnum {
+ Thing1 = 'thing one',
+ Thing2 = 'thing two',
+}
+
+function onlyKeys(key: keyof typeof MyEnum) {
+  console.log(key, MyEnum[key]);
+}
+
+const testStr = "Thing2";
+
+if (isEnumKey(MyEnum, testStr)) {
+  // compiler knows that testStr is of type `keyof typeof MyEnum`
+  onlyKeys(testStr);
+}
 ```
 <a name="module_validators..isEnumValue"></a>
 
@@ -265,7 +378,21 @@ enum MyEnum { Thing1 = 'thing one', Thing2 = 'thing two',}function onlyKeys
 
 **Example**  
 ```js
-enum MyEnum { Thing1 = 'thing one', Thing2 = 'thing two',}function onlyVals(val: MyEnum) {  console.log("onlyVals", val);}const testStr = "thing two";if (isEnumValue(MyEnum, testStr)) {  // compiler knows that testStr is of type `MyEnum`  onlyVals(testStr);}
+enum MyEnum {
+ Thing1 = 'thing one',
+ Thing2 = 'thing two',
+}
+
+function onlyVals(val: MyEnum) {
+  console.log("onlyVals", val);
+}
+
+const testStr = "thing two";
+
+if (isEnumValue(MyEnum, testStr)) {
+  // compiler knows that testStr is of type `MyEnum`
+  onlyVals(testStr);
+}
 ```
 <a name="isMathematicalNumber"></a>
 
