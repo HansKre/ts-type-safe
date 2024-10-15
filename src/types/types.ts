@@ -203,7 +203,7 @@ export type PrefixedKeys<T, P extends string> = {
 STUB = 1;
 
 /**
- * Helper type to make a single property optional
+ * Helper type to make selected properties optional
  *
  * @example
  *
@@ -226,5 +226,28 @@ STUB = 1;
  * @typedef {PartialBy} PartialBy<T, K extends keyof T>
  */
 export type PartialBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
+
+STUB = 1;
+
+/**
+ * Helper type to make selected properties required
+ *
+ * @example
+ *
+ * type Person = {
+ *   id?: string;
+ *   name?: string;
+ *   age?: number;
+ * };
+ *
+ * type NewPerson = RequiredBy<Person, 'id' | 'name'>
+ * //    ^? type NewPerson = Omit<Person, "id" | "name"> & Required<Pick<Person, "id" | "name">>
+ * type PrettyNewPerson = Prettify<NewPerson>;
+ * //    ^? type PrettyNewPerson = { name: string; age: number; id? : string | undefined; }
+ *
+ * @typedef {RequiredBy} RequiredBy<T, K extends keyof T>
+ */
+export type RequiredBy<T, K extends keyof T> = Omit<T, K> &
+  Required<Pick<T, K>>;
 
 STUB = 1;
