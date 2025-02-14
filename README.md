@@ -44,6 +44,7 @@
     * [~PrefixedKeys<T,](#module_types..PrefixedKeys<T,) : <code>PrefixedKeys</code>
     * [~PartialBy<T,](#module_types..PartialBy<T,) : <code>PartialBy</code>
     * [~RequiredBy<T,](#module_types..RequiredBy<T,) : <code>RequiredBy</code>
+    * [~UndefinedToOptional<T>](#module_types..UndefinedToOptional<T>) : <code>UndefinedToOptional</code>
 
 <a name="module_types..Prettify<T>"></a>
 
@@ -226,6 +227,23 @@ type NewPerson = RequiredBy<Person, 'id' | 'name'>
 //    ^? type NewPerson = Omit<Person, "id" | "name"> & Required<Pick<Person, "id" | "name">>
 type PrettyNewPerson = Prettify<NewPerson>;
 //    ^? type PrettyNewPerson = { name: string; age: number; id? : string | undefined; }
+```
+<a name="module_types..UndefinedToOptional<T>"></a>
+
+### types~UndefinedToOptional<T> : <code>UndefinedToOptional</code>
+<p>Helper type to convert properties from potentially undefined to optional</p>
+
+**Kind**: inner typedef of [<code>types</code>](#module_types)  
+**Example**  
+```js
+type Person = {
+  id: string | undefined;
+  name: string;
+  age: number | undefined;
+};
+
+type NewPerson = Prettify<UndefinedToOptional<Person>>
+//    ^? type NewPerson = { id?: string; name: string; age?: number; };
 ```
 <a name="module_classNames"></a>
 
