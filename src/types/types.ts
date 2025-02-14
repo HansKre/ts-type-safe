@@ -136,7 +136,7 @@ export type KeysOf<T> = keyof T;
 STUB = 1;
 
 // Below type does not work with nested optional or undefined properties, hence it is an intermediate helper to be composed with DeepRequired
-type DeepKeysOfHelper<TBase, TPrefix extends string = ''> = {
+type DeepKeysOfHelper<TBase, TPrefix extends string = ""> = {
   [K in keyof TBase]-?: TBase[K] extends (infer U)[]
     ? U extends object
       ?
@@ -249,5 +249,32 @@ STUB = 1;
  */
 export type RequiredBy<T, K extends keyof T> = Omit<T, K> &
   Required<Pick<T, K>>;
+
+STUB = 1;
+
+/**
+ * Helper type to convert properties from potentially undefined to optional
+ *
+ * @example
+ *
+ * type Person = {
+ *   id: string | undefined;
+ *   name: string;
+ *   age: number | undefined;
+ * };
+ *
+ * type NewPerson = Prettify<UndefinedToOptional<Person>>
+ * //    ^? type NewPerson = { id?: string; name: string; age?: number; };
+ *
+ * @typedef {UndefinedToOptional} UndefinedToOptional<T>
+ */
+export type UndefinedToOptional<T> = {
+  [K in keyof T as undefined extends T[K] ? K : never]?: Exclude<
+    T[K],
+    undefined
+  >;
+} & {
+  [K in keyof T as undefined extends T[K] ? never : K]: T[K];
+};
 
 STUB = 1;
