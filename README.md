@@ -1,9 +1,11 @@
 <h1>ts-type-safe</h1>
 
-<p>Useful utility functions and types for a more type-safe TypeScript</p>
-
 ![view on npm](https://img.shields.io/npm/v/ts-type-safe) ![NPM](https://img.shields.io/npm/l/ts-type-safe)
 
+Lightweight TypeScript utility library that helps developers write more robust and type-safe code. Ideal for developers who want cleaner code and safer runtime checks in TypeScript projects.
+
+- **Powerful Type Helpers**: Includes `DeepRequired`, `DeepPartial`, `ValuesOf`, `KeysOf`, `DeepKeysOf`, `PartialBy`, and more — making it easier to shape complex TypeScript types safely.
+- **Type-Safe Validators**: Runtime guards like `isDefined`, `isObject`, `isNonEmptyArray`, `isEnumKey`, and `isEnumValue` ensure type correctness across your code.
 
 ## Modules
 
