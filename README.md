@@ -45,6 +45,7 @@
     * [~PartialBy<T,](#module_types..PartialBy<T,) : <code>PartialBy</code>
     * [~RequiredBy<T,](#module_types..RequiredBy<T,) : <code>RequiredBy</code>
     * [~UndefinedToOptional<T>](#module_types..UndefinedToOptional<T>) : <code>UndefinedToOptional</code>
+    * [~Nullish<T>](#module_types..Nullish<T>) : <code>Nullish</code>
 
 <a name="module_types..Prettify<T>"></a>
 
@@ -244,6 +245,19 @@ type Person = {
 
 type NewPerson = Prettify<UndefinedToOptional<Person>>
 //    ^? type NewPerson = { id?: string; name: string; age?: number; };
+```
+<a name="module_types..Nullish<T>"></a>
+
+### types~Nullish<T> : <code>Nullish</code>
+<p>Convenience type for a value that can be <code>null</code> or <code>undefined</code></p>
+
+**Kind**: inner typedef of [<code>types</code>](#module_types)  
+**Example**  
+```js
+type MaybeId = Nullish<string>;
+// type MaybeId = string | null | undefined
+
+function getUser(id: Nullish<string>) { ... }
 ```
 <a name="module_classNames"></a>
 

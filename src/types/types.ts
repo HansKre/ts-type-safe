@@ -278,3 +278,19 @@ export type UndefinedToOptional<T> = {
 };
 
 STUB = 1;
+
+/**
+ * Convenience type for a value that can be `null` or `undefined`
+ *
+ * @example
+ *
+ * type MaybeId = Nullish<string>;
+ * // type MaybeId = string | null | undefined
+ *
+ * function getUser(id: Nullish<string>) { ... }
+ *
+ * @typedef {Nullish} Nullish<T>
+ */
+export type Nullish<T> = T | null | undefined;
+
+STUB = 1;
