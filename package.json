@@ -8,7 +8,7 @@
     "build:check": "tsc --noEmit",
     "build:doc": "jsdoc2md --configure ./jsdoc2md.json --template README.hbs --no-cache --files ./src/**/*.ts > README.md",
     "build:doc:inspect": "jsdoc2md --json --configure ./jsdoc2md.json --no-cache --files ./src/**/*.ts > jsdoc2md.out.json",
-    "prepare": "npm run test && npm run build && npm run build:doc",
+    "prepare": "pnpm run test && pnpm run build && pnpm run build:doc",
     "test": "jest",
     "test:w": "jest --watch"
   },
