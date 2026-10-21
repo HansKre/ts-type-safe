@@ -1,11 +1,17 @@
 <h1>ts-type-safe</h1>
 
+<p>Useful utility functions and types for a more type-safe TypeScript</p>
+
 ![view on npm](https://img.shields.io/npm/v/ts-type-safe) ![NPM](https://img.shields.io/npm/l/ts-type-safe)
 
-Lightweight TypeScript utility library that helps developers write more robust and type-safe code. Ideal for developers who want cleaner code and safer runtime checks in TypeScript projects.
+## Install
 
-- **Powerful Type Helpers**: Includes `DeepRequired`, `DeepPartial`, `ValuesOf`, `KeysOf`, `DeepKeysOf`, `PartialBy`, and more — making it easier to shape complex TypeScript types safely.
-- **Type-Safe Validators**: Runtime guards like `isDefined`, `isObject`, `isNonEmptyArray`, `isEnumKey`, and `isEnumValue` ensure type correctness across your code.
+```sh
+pnpm add ts-type-safe
+# or: npm install ts-type-safe
+# or: yarn add ts-type-safe
+```
+
 
 ## Modules
 
@@ -47,6 +53,7 @@ Lightweight TypeScript utility library that helps developers write more robust a
     * [~PartialBy<T,](#module_types..PartialBy<T,) : <code>PartialBy</code>
     * [~RequiredBy<T,](#module_types..RequiredBy<T,) : <code>RequiredBy</code>
     * [~UndefinedToOptional<T>](#module_types..UndefinedToOptional<T>) : <code>UndefinedToOptional</code>
+    * [~Nullish<T>](#module_types..Nullish<T>) : <code>Nullish</code>
 
 <a name="module_types..Prettify<T>"></a>
 
@@ -246,6 +253,19 @@ type Person = {
 
 type NewPerson = Prettify<UndefinedToOptional<Person>>
 //    ^? type NewPerson = { id?: string; name: string; age?: number; };
+```
+<a name="module_types..Nullish<T>"></a>
+
+### types~Nullish<T> : <code>Nullish</code>
+<p>Convenience type for a value that can be <code>null</code> or <code>undefined</code></p>
+
+**Kind**: inner typedef of [<code>types</code>](#module_types)  
+**Example**  
+```js
+type MaybeId = Nullish<string>;
+// type MaybeId = string | null | undefined
+
+function getUser(id: Nullish<string>) { ... }
 ```
 <a name="module_classNames"></a>
 
