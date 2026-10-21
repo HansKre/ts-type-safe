@@ -1,6 +1,6 @@
 {
   "name": "ts-type-safe",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "Utilities for a more type-safe TypeScript",
   "scripts": {
     "prebuild": "rimraf dist",
@@ -40,7 +40,9 @@
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "publishConfig": {
     "access": "public"
   }
