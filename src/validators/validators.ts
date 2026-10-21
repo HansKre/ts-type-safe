@@ -52,7 +52,9 @@ export function hasOwnProperties<Y extends PropertyKey>(
  *
  * @param obj to check
  */
-export function isNonEmptyArray(obj: unknown): obj is unknown[] {
+export function isNonEmptyArray<T>(obj: T[]): obj is [T, ...T[]];
+export function isNonEmptyArray(obj: unknown): obj is unknown[];
+export function isNonEmptyArray(obj: unknown): boolean {
   return Array.isArray(obj) && obj.length > 0;
 }
 
@@ -61,7 +63,9 @@ export function isNonEmptyArray(obj: unknown): obj is unknown[] {
  *
  * @param obj to check
  */
-export function isEmptyArray(obj: unknown): obj is unknown[] {
+export function isEmptyArray<T>(obj: T[]): obj is [];
+export function isEmptyArray(obj: unknown): obj is unknown[];
+export function isEmptyArray(obj: unknown): boolean {
   return Array.isArray(obj) && obj.length === 0;
 }
 
