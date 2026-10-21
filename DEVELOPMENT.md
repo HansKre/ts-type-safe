@@ -3,26 +3,31 @@
 ## Publishing to NPM
 
 ```sh
-npm install
+pnpm install
 # make code changes
 # commit & push code
 # to bump lib-version in package.json, run:
-npm version patch #patch|minor|major
+pnpm version patch # patch|minor|major
 npm login
-# npm run build: not needed if prepare-script exists and does that,
+# pnpm run build: not needed if prepare-script exists and does that,
 # but this might update README.md and to avoid changes to README.md which have to
 # be committed AFTER npm publish, you might want to run it yourself
-npm run build
-npm publish
+pnpm run build
+pnpm publish
 ```
 
-## Install jest with TypeScript
+## Jest with TypeScript
 
-[Source](https://jestjs.io/docs/getting-started)
+Tests run via `babel-jest` using `@babel/preset-typescript`. No separate TypeScript
+compilation step is needed for tests — Babel strips types at test time.
+
+The config lives in `babel.config.js` and is picked up automatically by Jest.
 
 ```sh
-# install jest
-npm install --save-dev jest @types/jest ts-jest
-# generate basic config file using ts-jest preset to transpile TypeScript
-npx ts-jest config:init
+# install deps
+pnpm install
+# run tests
+pnpm test
+# watch mode
+pnpm run test:w
 ```

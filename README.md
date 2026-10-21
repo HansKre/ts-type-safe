@@ -4,6 +4,14 @@
 
 ![view on npm](https://img.shields.io/npm/v/ts-type-safe) ![NPM](https://img.shields.io/npm/l/ts-type-safe)
 
+## Install
+
+```sh
+pnpm add ts-type-safe
+# or: npm install ts-type-safe
+# or: yarn add ts-type-safe
+```
+
 
 ## Modules
 
